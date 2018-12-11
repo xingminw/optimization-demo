@@ -10,3 +10,5 @@ Content including:
 
 * simplex.py: simplex method to solve LP and output all the details
 * scipy_lp.py: solver of LP from scipy.optimize
+* bisection.py: calculate the zero point of a monotonous function
+* golden_section.py: calculate the minimum value of a constrained convex function
