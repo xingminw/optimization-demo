@@ -55,6 +55,7 @@ def ilp_algorithm(c, a_ub=None, b_ub=None, a_eq=None, b_eq=None):
             local_ans = local_node["ans"]
             local_obj = local_node["obj"]
 
+            print("<==============================>")
             print("local node key:", local_key)
             print("local ans", [np.round(val, 3) for val in local_ans], "local obj", np.round(local_obj, 3))
 
@@ -68,7 +69,7 @@ def ilp_algorithm(c, a_ub=None, b_ub=None, a_eq=None, b_eq=None):
                     upper_bound = local_obj
                     current_best_dict["ans"] = local_ans
                     current_best_dict["obj"] = local_obj
-                    break
+                break
 
             local_non_integer = local_ans[non_integer_idx]
 
@@ -123,7 +124,6 @@ def ilp_algorithm(c, a_ub=None, b_ub=None, a_eq=None, b_eq=None):
                 temp_branch_dict = {"a_ub": update_a_ub, "a_eq": local_a_eq, "b_ub": update_b_ub,
                                     "b_eq": local_b_eq, "ans": local_update_ans, "obj": local_update_obj}
                 update_layer_dict[branch_key] = temp_branch_dict
-            print("<==============================>")
 
         branch_layers_list.append(update_layer_dict)
     print("Complete the branch and bound")
@@ -147,8 +147,12 @@ def return_non_integer_idx(temp_list, tolerance=0.0000001):
 
 def ilp_sample():
     c = [-9, -5, -6, -4]
-    a_ub = [[6, 3, 5, 2], [0, 0, 1, 1], [-1, 0, 1, 0], [0, -1, 0, 1]]
-    b_ub = [10, 1, 0, 0]
+    # a_ub = [[6, 3, 5, 2], [0, 0, 1, 1], [-1, 0, 1, 0], [0, -1, 0, 1]]
+    # b_ub = [10, 1, 0, 0]
+
+    a_ub = [[6, 3, 5, 2], [0, 0, 1, 1], [-1, 0, 1, 0], [0, -1, 0, 1],
+            [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    b_ub = [10, 1, 0, 0, 1, 1, 1, 1]
     ilp_algorithm(c, a_ub=a_ub, b_ub=b_ub)
 
 
